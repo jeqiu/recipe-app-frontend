@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
 import Recipe from './components/Recipe';
 import Header from './components/Header';
@@ -48,11 +48,12 @@ const App = () => {
 
 
   return (
-    <div className='container'>
-      <Header title='Quick-Pick Recipe' />
-
-
-      <form onSubmit={getRecipe}>
+    <Container>
+      
+        <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
+      
+      <Row className="justify-content-center text-center">
+      <form onSubmit={getRecipe} >
         <label htmlFor='recipe-search-input'>Suggest a Recipe</label>
         <input 
           id='recipe-search-input'
@@ -69,23 +70,29 @@ const App = () => {
           {isLoading ? 'Loading…' : 'Get New Recipe'}
         </Button>
       </form> 
+      </Row>
+      
+        {!isLoading && (
+          <Recipe 
+          title={recipe.title} 
+          image={recipe.image} 
+          sourceUrl={recipe.sourceUrl}
+          ingredients={recipe.extendedIngredients}
+          setLoading={setLoading}   
+        />
+        )}
 
-      {!isLoading && (
-        <Recipe 
-        title={recipe.title} 
-        image={recipe.image} 
-        sourceUrl={recipe.sourceUrl}
-        ingredients={recipe.extendedIngredients}
-        setLoading={setLoading}   
-      />
-      )}
-
-      {isLoading && (
-        <TailSpin color="#00BFFF" height={100} width={100} />
-      )}
-
-      <Footer />
-    </div>
+        {isLoading && (
+          <Row className="justify-content-center text-center">
+            <TailSpin color="#00BFFF" height={100} width={100} />
+          </Row>
+        )}
+      
+      <Row className="justify-content-center text-center">
+        <Footer />
+      </Row>
+    
+    </Container>
   )
 }
 
