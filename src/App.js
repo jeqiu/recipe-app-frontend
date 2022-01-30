@@ -12,8 +12,9 @@ import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loade
 
 const App = () => {
   const [recipe, setRecipe] = useState({});
-  const [recipeQuery, setRecipeQuery] = useState('');
+  const [searchInput, setsearchInput] = useState('');
   const [isLoading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
 
   // useEffect(() => {
   //   recipeService
@@ -30,7 +31,9 @@ const App = () => {
   const getRecipe = (event) => {
     event.preventDefault();
     setLoading(true);
-    if (recipeQuery) {
+    setImgLoading(true);
+
+    if (searchInput) {
       // diet restrictions dropdown
       return;
     } else {
@@ -41,9 +44,9 @@ const App = () => {
     }
   };
 
-  const handleRecipeQueryChange = (event) => {
+  const handleSearchInputChange = (event) => {
     console.log(event.target.value);
-    setRecipeQuery(event.target.value);
+    setsearchInput(event.target.value);
   };
 
 
@@ -59,30 +62,33 @@ const App = () => {
           id='recipe-search-input'
           placeholder='pumpkin, butter, etc'
           pattern='^$|(([a-z]|[A-Z])*,?\s?)*'
-          value={recipeQuery}
-          onChange={handleRecipeQueryChange}
+          value={searchInput}
+          onChange={handleSearchInputChange}
         />
         <Button 
           variant='primary' 
           type='submit'
           disabled={isLoading}
         >
-          {isLoading ? 'Loading…' : 'Get New Recipe'}
+          {isLoading ? 'Get New Recipe' : 'Get New Recipe'}
         </Button>
       </form> 
       </Row>
       
         {!isLoading && (
-          <Recipe 
-          title={recipe.title} 
-          image={recipe.image} 
-          sourceUrl={recipe.sourceUrl}
-          ingredients={recipe.extendedIngredients}
-          setLoading={setLoading}   
-        />
+          <Row>
+            <Recipe 
+            title={recipe.title} 
+            image={recipe.image} 
+            sourceUrl={recipe.sourceUrl}
+            ingredients={recipe.extendedIngredients}
+            imgLoading={imgLoading}
+            setImgLoading={setImgLoading} 
+            />
+          </Row>
         )}
 
-        {isLoading && (
+        {imgLoading && (
           <Row className="justify-content-center text-center">
             <TailSpin color="#00BFFF" height={100} width={100} />
           </Row>
