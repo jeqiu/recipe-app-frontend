@@ -53,7 +53,7 @@ const App = () => {
   return (
     <Container>
       
-        <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
+      <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
       
       <Row className="justify-content-center text-center">
       <form onSubmit={getRecipe} >
@@ -76,7 +76,7 @@ const App = () => {
       </Row>
       
         {!isLoading && (
-          <Row>
+          <Row className="justify-content-center">
             <Recipe 
             title={recipe.title} 
             image={recipe.image} 
