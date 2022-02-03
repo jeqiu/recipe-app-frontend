@@ -8,7 +8,7 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
     setTimeout(() => {
       console.log('executing imgLoad timeout');
       setImgLoading(false);
-    }, 1000)
+    }, 1100)
   }
   
   if (title) {
@@ -16,24 +16,23 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
     <Col 
     style={{ display: imgLoading ? 'none' : null, borderRadius: 10, border: '2px solid #404040' }}
     sm={{ span: 8 }}
-    md={{ span: 8 }}
-    lg={{ span: 8 }}
     >
-      <Row><Col><br /></Col></Row>
-      <Row className="align-items-center justify-content-center">
+      
+      <Row 
+        style={{paddingTop: '1rem'}}
+        className="align-items-center justify-content-center"
+      >
         <Col 
-          sm={{ span: 5 }}
-          md={{ span: 4 }}
-          lg={{ span: 4 }}
+          sm={{ span: 6 }}
+          md={{ span: 5 }}
         >
           <Image src={image} alt={title} rounded="true" fluid="true" />
         </Col>
         <Col 
-          className="text-left"
-          sm={{ span: 6 }} 
-          md={{ span: 7 }} 
-          lg={{ span: 7 }}
-          as="h2"
+          className="text-center"
+          sm={{ span: 6 }}
+          sm={{ span: 7 }} 
+          as="h3"
         >
           {title}
         </Col>
@@ -45,8 +44,8 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
 
       <Row as='h4' className="align-items-center">
         <Col           
-          md={{ span: 6, offset: 2 }} 
-          lg={{ span: 6, offset: 2 }}
+          className="text-left" 
+          style={{paddingLeft: '1rem', paddingBottom: '0.5rem' }}
         >
           Ingredients Needed
         </Col>
@@ -54,10 +53,13 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
       
       <IngredientList ingredients={ingredients} />
 
-      <Row className="text-center">
+      <Row 
+        className="text-center"
+        style={{paddingBottom: '1rem'}}
+      >
         <Col><a href={sourceUrl}>View Full Recipe</a></Col>
       </Row>
-      <Row><Col><br /></Col></Row>
+
     </Col>
     )
   }

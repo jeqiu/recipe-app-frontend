@@ -2,9 +2,9 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 const Header = ({title, subtitle}) => {
-  
+
   const headerStyle = {
-    color: 'blue',
+    color: 'red',
   }
 
   return (

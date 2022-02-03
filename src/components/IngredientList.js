@@ -15,13 +15,13 @@ const IngredientList = ({ ingredients }) => {
     const arrayBreakpoint = Math.ceil(numIngredients / 2);
     const ingredientsFirst = filteredIngredients.slice(0, arrayBreakpoint);
     const ingredientsSecond = filteredIngredients.slice(arrayBreakpoint);
+
     return (
       <Row className="align-items-center justify-content-center">
         <Col
           as='ul'
-          sm={{ span: 5, offset: 1}} 
-          md={{ span: 4, offset: 1 }} 
-          lg={{ span: 4, offset: 1 }}
+          style={{marginLeft: '3rem'}}
+          sm={{ span: 5}} 
         >
           {ingredientsFirst.map(ingredient => {
             const name = ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);
@@ -31,9 +31,8 @@ const IngredientList = ({ ingredients }) => {
         </Col>
         <Col
           as='ul'
+          style={{marginLeft: '3rem'}} 
           sm={{ span: 5 }} 
-          md={{ span: 4 }} 
-          lg={{ span: 4 }}
         >
           {ingredientsSecond.map(ingredient => {
             const name = ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);
@@ -45,7 +44,12 @@ const IngredientList = ({ ingredients }) => {
     )
   } else {
     return (
-      <Col>
+      <Row className="align-items-center">
+      <Col
+        as='ul'
+        sm={{ span: 5}}
+        style={{marginLeft: '3rem'}} 
+      >
         <ul>
         {filteredIngredients.map(ingredient => {
             const name = ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);
@@ -54,6 +58,7 @@ const IngredientList = ({ ingredients }) => {
         )}
         </ul>
       </Col>
+      </Row>
     )
   }
 

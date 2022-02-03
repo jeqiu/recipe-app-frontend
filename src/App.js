@@ -51,11 +51,15 @@ const App = () => {
 
 
   return (
-    <Container>
-      
+    <Container fluid>
+      <div className="d-flex flex-column min-vh-100">
+      <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
       <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
       
-      <Row className="justify-content-center text-center">
+      <Row 
+      className="justify-content-center text-center"
+      style={{margin: '1rem'}}
+      >
       <form onSubmit={getRecipe} >
         <label htmlFor='recipe-search-input'>Suggest a Recipe</label>
         <input 
@@ -93,10 +97,11 @@ const App = () => {
             <TailSpin color="#00BFFF" height={100} width={100} />
           </Row>
         )}
-      
-      <Row className="justify-content-center text-center">
+      </div>
+      <Row>
         <Footer />
       </Row>
+      </div>
     
     </Container>
   )
