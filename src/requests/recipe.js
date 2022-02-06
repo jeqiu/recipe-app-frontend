@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api'
+const baseUrl = '/api'
+//heroku url: https://mysterious-dusk-60863.herokuapp.com/
 
 const getRandomRecipe = async () => {
   try { 
