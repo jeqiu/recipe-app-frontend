@@ -5,8 +5,9 @@ const baseUrl = '/api'
 const getRandomRecipe = async () => {
   try { 
     const response = await axios.get(baseUrl + '/random_recipe');
-    const randomRecipe = response.data.recipes[0];
+    const randomRecipe = response.data;
     return randomRecipe;
+    
   } catch (error) {
     if (error.response) { // request made & server responded w/ status code outside of 2xx
       console.log("error data:", error.response);
@@ -19,13 +20,15 @@ const getRandomRecipe = async () => {
   }
 };
 
-const getSearchRecipe = async () => {
+const getSearchRecipe = async (searchInput) => {
   try { 
-    const response = await axios.get(baseUrl + '/search_recipe');
-    const recipeArr = response.data;
-    const numOfRecipes = recipeArr.length;
-    const selectedRecipe = recipeArr[Math.floor(Math.random()*numOfRecipes)];
+    const strArr = searchInput.split(',');
+    const strParam = strArr.join('_');
+
+    const response = await axios.get(baseUrl + '/search_recipe/' + strParam);
+    const selectedRecipe = response.data;
     return selectedRecipe;
+
   } catch (error) {
     if (error.response) { // request made & server responded w/ status code outside of 2xx
       console.log("error data:", error.response.data);

@@ -34,7 +34,11 @@ const App = () => {
     setImgLoading(true);
 
     if (searchInput) {
-      // diet restrictions dropdown
+      // input with intolerances
+      recipeService
+      .getSearchRecipe(searchInput)
+      .then(newRecipe=>setRecipe(newRecipe))
+      .then(() => setLoading(false));
       return;
     } else {
       recipeService
@@ -61,10 +65,10 @@ const App = () => {
       style={{margin: '1rem'}}
       >
       <form onSubmit={getRecipe} >
-        <label htmlFor='recipe-search-input'>Suggest a Recipe</label>
+        <label htmlFor='recipe-search-input'>Exclude:</label>
         <input 
           id='recipe-search-input'
-          placeholder='pumpkin, butter, etc'
+          placeholder='Any intolerances you may have e.g. shellfish,peanuts'
           pattern='^$|(([a-z]|[A-Z])*,?\s?)*'
           value={searchInput}
           onChange={handleSearchInputChange}
