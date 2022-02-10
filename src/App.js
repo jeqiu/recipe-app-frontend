@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
 import Recipe from './components/Recipe';
@@ -57,6 +58,7 @@ const App = () => {
   return (
     <Container fluid>
       <div className="d-flex flex-column min-vh-100">
+      <BrowserRouter>
       <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
       <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
       
@@ -102,6 +104,8 @@ const App = () => {
           </Row>
         )}
       </div>
+      </BrowserRouter>
+      
       <Row>
         <Footer />
       </Row>
