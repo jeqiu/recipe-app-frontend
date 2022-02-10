@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { Container, Row, Col, Form, Button, Navbar, Nav } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
 import Recipe from './components/Recipe';
 import Header from './components/Header';
@@ -56,10 +56,34 @@ const App = () => {
 
 
   return (
+    <>
+    <Navbar bg="dark" variant="dark">
+      <Container>
+      <Navbar.Brand href="#home">
+        RecipeExperiments
+      </Navbar.Brand>
+      <Nav className="me-auto">
+        <Nav.Link as={Link} to="/">
+          Home
+        </Nav.Link>
+        <Nav.Link as={Link} to="/recipes">Recipes</Nav.Link>
+        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+      </Nav>
+      </Container>
+    </Navbar>
+
     <Container fluid>
       <div className="d-flex flex-column min-vh-100">
-      <BrowserRouter>
+      <Switch>
+        <Route path="/recipes">
+          <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>to implement</div>
+        </Route>
+        <Route path="/login">
+          <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>to implement</div>
+        </Route>
+      <Route path="/">
       <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
+
       <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
       
       <Row 
@@ -104,14 +128,15 @@ const App = () => {
           </Row>
         )}
       </div>
-      </BrowserRouter>
-      
+      </Route>
+      </Switch>
+
       <Row>
         <Footer />
       </Row>
       </div>
-    
     </Container>
+    </>
   )
 }
 
