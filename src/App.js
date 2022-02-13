@@ -66,7 +66,7 @@ const App = () => {
         <Nav.Link as={Link} to="/">
           Home
         </Nav.Link>
-        <Nav.Link as={Link} to="/recipes">Recipes</Nav.Link>
+        <Nav.Link as={Link} to="/recipes">Saved Recipes</Nav.Link>
         <Nav.Link as={Link} to="/login">Login</Nav.Link>
       </Nav>
       </Container>

@@ -66,11 +66,17 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
 
   return (
   <Col>
-    <Row as='h3' className="justify-content-center text-center">
-      Not sure what to make for your next meal?
+    <Row>
+      <Col as='h4' className="justify-content-center text-center">Not sure what to make?</Col>
     </Row>
-    <Row as='p' className="justify-content-center text-center">
-      This returns a random recipe so you can get ideas and be inspired.
+    <Row className="justify-content-center">
+      <Col 
+        as='p'
+        className="text-center"
+        sm={{ span: 8 }}
+      >
+      Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that you can quickly and easily decide whether this is somthing you're interested in making.
+      </Col>
     </Row>
   </Col>
   )
