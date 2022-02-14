@@ -3,6 +3,7 @@ import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Navbar, Nav } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
 import Recipe from './components/Recipe';
+import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import recipeService from './requests/recipe';
@@ -76,7 +77,7 @@ const App = () => {
     <Navbar bg="dark" variant="dark">
       <Container>
       <Navbar.Brand href="#home">
-        RecipeExperiments
+        Quick-Pick Recipes
       </Navbar.Brand>
       <Nav className="me-auto">
         <Nav.Link as={Link} to="/">
@@ -98,8 +99,11 @@ const App = () => {
         </Route>
         <Route path="/login">
           <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
+          <Row>
+            <LoginForm />
+          </Row>
 
-          <Row 
+          {/* <Row 
           className="justify-content-center text-center"
           style={{margin: '1rem'}}
           >
@@ -118,7 +122,7 @@ const App = () => {
               {user}
             </Button>
           </form> 
-          </Row>
+          </Row> */}
        
           </div>
         </Route>
