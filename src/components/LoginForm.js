@@ -7,10 +7,10 @@ const LoginForm = () => {
   const schema = Yup.object().shape({
     username: Yup.string()
       .required("Required")
-      .min(6, "Username must be minimum 6 characters."),
+      .min(6, "Username must be at least 6 characters."),
     password: Yup.string()
       .required("Required")
-      .min(8, "Password must be minimum 8 characters.")
+      .min(8, "Password must be at least 8 characters.")
       .matches(/(?=.*[0-9])/, "Password must contain a number.")
   })
   
