@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Form, Button, Navbar, Nav } from 'react-bootstrap';
+import { Route, Switch, Link } from 'react-router-dom';
+import { Container, Row, Col, Form, InputGroup, Button, Navbar, Nav } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
 import Recipe from './components/Recipe';
 import LoginForm from './components/LoginForm';
@@ -129,29 +129,34 @@ const App = () => {
       <Route path="/">
       <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
 
-      <Header title='Quick-Pick Recipe' subtitle='Quick suggestions and inspiration for your next recipe!' />
+      <Header title='Quick-Pick Recipes' subtitle='A random suggestion for your next recipe!' />
       
       <Row 
       className="justify-content-center text-center"
       style={{margin: '1rem'}}
       >
-      <form onSubmit={getRecipe} >
-        <label htmlFor='recipe-search-input'>Exclude:</label>
-        <input 
+      <Form onSubmit={getRecipe} >
+      <InputGroup>
+        {/* <Form.Label htmlFor='recipe-search-input'>Exclude: </Form.Label> */}
+        <InputGroup.Text htmlFor='recipe-search-input'>Exclude intolerances: </InputGroup.Text>
+        <Form.Control 
+          // className="w-50"
+          type='text'
           id='recipe-search-input'
-          placeholder='Any intolerances you may have e.g. shellfish,peanuts'
+          placeholder='e.g. peanuts, shellfish'
           pattern='^$|(([a-z]|[A-Z])*,?\s?)*'
           value={searchInput}
           onChange={handleSearchInputChange}
         />
+        </InputGroup>
         <Button 
           variant='primary' 
           type='submit'
           disabled={isLoading}
         >
-          {isLoading ? 'Get New Recipe' : 'Get New Recipe'}
+          {isLoading ? 'Get A New Recipe' : 'Get A New Recipe'}
         </Button>
-      </form> 
+      </Form> 
       </Row>
       
         {!isLoading && (

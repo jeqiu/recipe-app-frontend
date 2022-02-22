@@ -57,7 +57,9 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
         className="text-center"
         style={{paddingBottom: '1rem'}}
       >
-        <Col><a href={sourceUrl}>View Full Recipe</a></Col>
+        <Col>
+        <a href={sourceUrl} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
+        </Col>
       </Row>
 
     </Col>
@@ -75,7 +77,7 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
         className="text-center"
         sm={{ span: 8 }}
       >
-      Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that you can quickly and easily decide whether this is somthing you're interested in making.
+      Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that it's easy to decide whether this is something you're interested in making.
       </Col>
     </Row>
   </Col>

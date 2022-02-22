@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <Col style={footerStyle} className='footer text-center py-3 bg-dark'>
-      <em>Quick-Pick-Recipe App, 2022.</em> Recipes from Spoonacular API.
+      <em>Recipes from Spoonacular API. Quick-Pick-Recipe App, 2022.</em>
     </Col>
   )
 }

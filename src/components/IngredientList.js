@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 const IngredientList = ({ ingredients }) => {
+  const MAX_ITEMS_PER_COLUMN = 5;
 
   const seen = new Set();
   const filteredIngredients = ingredients.filter(item => {
@@ -11,7 +12,7 @@ const IngredientList = ({ ingredients }) => {
   });
   const numIngredients = filteredIngredients.length;
 
-  if (numIngredients > 5) {
+  if (numIngredients > MAX_ITEMS_PER_COLUMN) {
     const arrayBreakpoint = Math.ceil(numIngredients / 2);
     const ingredientsFirst = filteredIngredients.slice(0, arrayBreakpoint);
     const ingredientsSecond = filteredIngredients.slice(arrayBreakpoint);
