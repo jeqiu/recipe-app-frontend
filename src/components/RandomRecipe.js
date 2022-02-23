@@ -30,7 +30,7 @@ const RandomRecipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImg
         <Col 
           className="text-center"
           sm={{ span: 6 }}
-          sm={{ span: 7 }} 
+          md={{ span: 7 }} 
           as="h3"
         >
           {title}
