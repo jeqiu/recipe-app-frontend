@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -38,9 +39,27 @@ const LoginForm = () => {
     } = props;
 
     return (
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
+      <Container>
+      {/* <Row className="justify-content-center text-center">
+      <Col as='h3'>Login to your account</Col>
+      </Row> */}
+      <Row className="justify-content-center text-center">
+
+      <Form onSubmit={handleSubmit}>
+        <InputGroup className="mb-3">
+          <InputGroup.Text htmlFor="username">Username:</InputGroup.Text>
+          <Form.Control
+            id="username" 
+            name="username"
+            type="text"
+            placeholder="Enter your username"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </InputGroup>
+        {/* <label htmlFor="username">Username</label> */}
+        {/* <input
         id="username" 
         name="username"
         type="text"
@@ -48,12 +67,24 @@ const LoginForm = () => {
         value={values.username}
         onChange={handleChange}
         onBlur={handleBlur}
-        />
+        /> */}
         {errors.username && touched.username && (
           <div>{errors.username}</div>
         )}
 
-        <label htmlFor="password">Password</label>
+        <InputGroup className="mb-3">
+          <InputGroup.Text htmlFor="password">Password: </InputGroup.Text>
+          <Form.Control
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </InputGroup>
+        {/* <label htmlFor="password">Password</label>
         <input
         id="password"
         name="password"
@@ -62,18 +93,26 @@ const LoginForm = () => {
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
-        />
+        /> */}
+
         {errors.password && touched.password && (
           <div>{errors.password}</div>
         )}
 
-        <button type="submit" disabled={isSubmitting}>
+        <Button 
+          type="submit" 
+          disabled={isSubmitting}
+        >
          Login
-        </button>
+        </Button>
 
-      </form>
+      </Form>
+      
+      </Row>
+      </Container>
     );
-  }}
+  }
+  }
   </Formik>
   )
 }

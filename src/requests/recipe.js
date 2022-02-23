@@ -30,9 +30,25 @@ const getSearchRecipe = async (searchInput) => {
 
   } catch (error) {
     if (error.response) { // request made & server responded w/ status code outside of 2xx
-      console.log("error data:", error.response.data);
-      console.log("error status:", error.response.status);
-      console.log("error headers:", error.response.headers);
+      console.log("error data:", error.response);
+    } else if (error.request) {  // request was made but no response was received
+      console.log(error.request);
+    } else {
+      console.log('error in setting up request: ', error.message);
+    }
+    console.log(error.config);
+  }
+};
+
+const getAllRecipes = async () => {
+  try { 
+    const response = await axios.get(baseUrl);
+    const allRecipes = response.data;
+    return allRecipes;
+    
+  } catch (error) {
+    if (error.response) { // request made & server responded w/ status code outside of 2xx
+      console.log("error data:", error.response);
     } else if (error.request) {  // request was made but no response was received
       console.log(error.request);
     } else {
@@ -54,5 +70,6 @@ const getSearchRecipe = async (searchInput) => {
 
 export default { 
   getRandomRecipe, 
-  getSearchRecipe
+  getSearchRecipe,
+  getAllRecipes
 }

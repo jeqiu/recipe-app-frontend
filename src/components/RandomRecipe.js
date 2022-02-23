@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Image } from 'react-bootstrap';
 import IngredientList from './IngredientList'
 
-const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoading }) => {
+const RandomRecipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoading }) => {
 
   if (imgLoading) {
     setTimeout(() => {
@@ -17,7 +17,6 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
     style={{ display: imgLoading ? 'none' : null, borderRadius: 10, border: '2px solid #404040' }}
     sm={{ span: 8 }}
     >
-      
       <Row 
         style={{paddingTop: '1rem'}}
         className="align-items-center justify-content-center"
@@ -64,24 +63,24 @@ const Recipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImgLoadin
 
     </Col>
     )
+  } else {
+    return (
+    <Col>
+      <Row>
+        <Col as='h4' className="justify-content-center text-center">Not sure what to make?</Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col 
+          as='p'
+          className="text-center"
+          sm={{ span: 8 }}
+        >
+        Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that it's easy to decide whether this is something you're interested in making.
+        </Col>
+      </Row>
+    </Col>
+    )
   }
-
-  return (
-  <Col>
-    <Row>
-      <Col as='h4' className="justify-content-center text-center">Not sure what to make?</Col>
-    </Row>
-    <Row className="justify-content-center">
-      <Col 
-        as='p'
-        className="text-center"
-        sm={{ span: 8 }}
-      >
-      Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that it's easy to decide whether this is something you're interested in making.
-      </Col>
-    </Row>
-  </Col>
-  )
 }
 
-export default Recipe
+export default RandomRecipe

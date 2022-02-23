@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, useLocation } from 'react-router-dom';
 import { Container, Row, Col, Form, InputGroup, Button, Navbar, Nav } from 'react-bootstrap';
 // import QuickPickForm from './components/QuickPickForm';
-import Recipe from './components/Recipe';
+import RandomRecipe from './components/RandomRecipe';
+import AllRecipes from './components/AllRecipes';
+import SavedRecipe from './components/SavedRecipe';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,6 +16,7 @@ import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loade
 
 
 const App = () => {
+  const location = useLocation();
   const [recipe, setRecipe] = useState({});
   const [searchInput, setsearchInput] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -22,17 +25,11 @@ const App = () => {
   const [usernameInput, setUsername] = useState('');
   const [user, setUser] = useState('');
 
-  // useEffect(() => {
-  //   recipeService
-  //     .getRandomRecipe()
-  //     .then(recipeObj => {
-  //       setRecipe(recipeObj);
-  //       console.log(recipeObj.title);
-  //       console.log(recipeObj.image);
-  //       console.log(recipeObj.sourceUrl);
-  //       console.log(recipeObj.extendedIngredients);
-  //   })
-  // }, []);
+
+  useEffect(() => {
+    console.log(`You changed the page to: ${location.pathname}`);
+  }, [location]);
+
 
   const getRecipe = (event) => {
     event.preventDefault();
@@ -94,7 +91,7 @@ const App = () => {
       <Switch>
         <Route path="/recipes">
           <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
-          to implement
+          <AllRecipes />
           </div>
         </Route>
         <Route path="/login">
@@ -135,33 +132,35 @@ const App = () => {
       className="justify-content-center text-center"
       style={{margin: '1rem'}}
       >
+      <Col md={{ span: 6 }}>
       <Form onSubmit={getRecipe} >
       <InputGroup>
         {/* <Form.Label htmlFor='recipe-search-input'>Exclude: </Form.Label> */}
-        <InputGroup.Text htmlFor='recipe-search-input'>Exclude intolerances: </InputGroup.Text>
+        <InputGroup.Text htmlFor='recipe-search-input'>Exclude:</InputGroup.Text>
         <Form.Control 
-          // className="w-50"
           type='text'
           id='recipe-search-input'
-          placeholder='e.g. peanuts, shellfish'
+          placeholder='any intolerances e.g. peanuts'
           pattern='^$|(([a-z]|[A-Z])*,?\s?)*'
           value={searchInput}
           onChange={handleSearchInputChange}
         />
-        </InputGroup>
         <Button 
+          // className="w-50"
           variant='primary' 
           type='submit'
           disabled={isLoading}
         >
           {isLoading ? 'Get A New Recipe' : 'Get A New Recipe'}
         </Button>
+        </InputGroup>
       </Form> 
+      </Col>
       </Row>
       
         {!isLoading && (
           <Row className="justify-content-center">
-            <Recipe 
+            <RandomRecipe
             title={recipe.title} 
             image={recipe.image} 
             sourceUrl={recipe.sourceUrl}
