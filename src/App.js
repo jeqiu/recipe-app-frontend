@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, useLocation } from 'react-router-dom';
 import { Container, Row, Col, Form, InputGroup, Button, Navbar, Nav } from 'react-bootstrap';
-// import QuickPickForm from './components/QuickPickForm';
+import QuickPickForm from './components/QuickPickForm';
 import RandomRecipe from './components/RandomRecipe';
 import AllRecipes from './components/AllRecipes';
 import SavedRecipe from './components/SavedRecipe';
@@ -109,6 +109,13 @@ const App = () => {
       <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
 
       <Header title='Quick-Pick Recipes' subtitle='A random suggestion for your next recipe!' />
+
+      {/* <QuickPickForm 
+        getRecipe={getRecipe}
+        searchInput={searchInput}
+        handleSearchInputChange={handleSearchInputChange}
+        isLoading={isLoading}
+      /> */}
       
       <Row 
       className="justify-content-center text-center"
@@ -117,7 +124,6 @@ const App = () => {
       <Col md={{ span: 6 }}>
       <Form onSubmit={getRecipe} >
       <InputGroup>
-        {/* <Form.Label htmlFor='recipe-search-input'>Exclude: </Form.Label> */}
         <InputGroup.Text htmlFor='recipe-search-input'>Exclude:</InputGroup.Text>
         <Form.Control 
           type='text'
@@ -128,7 +134,6 @@ const App = () => {
           onChange={handleSearchInputChange}
         />
         <Button 
-          // className="w-50"
           variant='primary' 
           type='submit'
           disabled={isLoading}
