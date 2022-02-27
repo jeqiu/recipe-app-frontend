@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, useLocation } from 'react-router-dom';
-import { Container, Row, Col, Form, InputGroup, Button, Navbar, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Navbar, Nav } from 'react-bootstrap';
 import QuickPickForm from './components/QuickPickForm';
 import AllRecipes from './components/AllRecipes';
-import SavedRecipe from './components/SavedRecipe';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import recipeService from './requests/recipe';
 import userService from './requests/user';
 import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-
-
 
 const App = () => {
   const location = useLocation();
@@ -35,7 +31,6 @@ const App = () => {
       .getUser(usernameInput)
       .then(username=>setUser(username));
   }
-
 
   return (
     <>
