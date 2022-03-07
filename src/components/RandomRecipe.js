@@ -66,16 +66,16 @@ const RandomRecipe = ({ title, image, sourceUrl, ingredients, imgLoading, setImg
   } else {
     return (
     <Col>
-      <Row>
-        <Col as='h4' className="justify-content-center text-center">Not sure what to make?</Col>
-      </Row>
+      {/* <Row>
+        <Col as='h5' className="justify-content-center text-center">Not sure what to make? Get a random recipe suggestion.</Col>
+      </Row> */}
       <Row className="justify-content-center">
         <Col 
           as='p'
           className="text-center"
-          sm={{ span: 8 }}
+          sm={{ span: 6 }}
         >
-        Get a random suggestion for a recipe. The recipe's ingredients are also displayed so that it's easy to decide whether this is something you're interested in making.
+        This app suggests a random recipe using the Spoonacular API. The ingredients are also displayed so that it's easy to decide whether this is something you're interested in making.
         </Col>
       </Row>
     </Col>

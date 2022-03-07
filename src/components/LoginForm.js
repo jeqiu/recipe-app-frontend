@@ -7,10 +7,10 @@ const LoginForm = () => {
   
   const schema = Yup.object().shape({
     username: Yup.string()
-      .required("Required")
+      .required("Username is required")
       .min(6, "Username must be at least 6 characters"),
     password: Yup.string()
-      .required("Required")
+      .required("Password is required")
       .min(8, "Password must be at least 8 characters")
       .matches(/(?=.*[0-9])/, "Password must contain a number")
   })
@@ -44,12 +44,12 @@ const LoginForm = () => {
         className="justify-content-center text-center"
         style={{margin: '1rem'}}
       >
-      <Col as='h3'>Login to your account</Col>
+      <Col as='h3'>User Login</Col>
       </Row>
       <Row className="justify-content-center text-center">
 
       <Form onSubmit={handleSubmit}>
-        <InputGroup className="mb-2">
+        <InputGroup className="mb-3" style={{marginTop: '0.5rem'}}>
           <InputGroup.Text htmlFor="username">Username:</InputGroup.Text>
           <Form.Control
             id="username" 
@@ -63,10 +63,10 @@ const LoginForm = () => {
         </InputGroup>
 
         {errors.username && touched.username && (
-          <div className="alert alert-warning" role="alert">{errors.username}</div>
+          <div className="alert alert-warning">{errors.username}</div>
         )}
 
-        <InputGroup className="mb-2">
+        <InputGroup className="mb-3" style={{marginTop: '0.5rem'}}>
           <InputGroup.Text htmlFor="password">Password: </InputGroup.Text>
           <Form.Control
             id="password"
@@ -90,7 +90,7 @@ const LoginForm = () => {
         /> */}
 
         {errors.password && touched.password && (
-          <div className="alert alert-warning" role="alert">{errors.password}</div>
+          <div className="alert alert-warning">{errors.password}</div>
         )}
 
         <Button 

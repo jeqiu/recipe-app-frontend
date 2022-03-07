@@ -43,8 +43,12 @@ const App = () => {
         <Nav.Link as={Link} to="/">
           Home
         </Nav.Link>
-        <Nav.Link as={Link} to="/recipes">Saved Recipes</Nav.Link>
-        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+        <Nav.Link as={Link} to="/recipes">
+          Saved Recipes
+        </Nav.Link>
+        <Nav.Link as={Link} to="/login">
+          Login
+        </Nav.Link>
       </Nav>
       </Container>
     </Navbar>
@@ -54,29 +58,27 @@ const App = () => {
       <Switch>
         <Route path="/recipes">
           <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
-          <Row>
-          <AllRecipes />
-          </Row>
+            <Row>
+              <AllRecipes />
+            </Row>
           </div>
         </Route>
 
         <Route path="/login">
           <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
-          <Row>
-            <LoginForm />
-          </Row>
-
+            <Row>
+              <LoginForm />
+            </Row>
           </div>
         </Route>
-      <Route path="/">
-      <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
 
-      <Header title='Quick-Pick Recipes' subtitle='A random suggestion for your next recipe!' />
+        <Route path="/">
+          <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
+            <Header title='Quick-Pick Recipes' subtitle='Not sure what to make? Get a random recipe suggestion.' />
+            <QuickPickForm />
+          </div>
+        </Route>
 
-      <QuickPickForm />
-  
-      </div>
-      </Route>
       </Switch>
 
       <Row>
