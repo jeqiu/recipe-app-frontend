@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import RandomRecipe from './RandomRecipe';
-import recipeService from '../requests/recipe';
+import recipeService from '../services/recipe';
 import { TailSpin } from  'react-loader-spinner';
 
 const QuickPickForm = () => {
@@ -71,6 +71,7 @@ const QuickPickForm = () => {
     {!isLoading && (
       <Row className="justify-content-center">
         <RandomRecipe
+          recipeId={recipe.id}
           title={recipe.title} 
           image={recipe.image} 
           sourceUrl={recipe.sourceUrl}

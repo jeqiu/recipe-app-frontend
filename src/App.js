@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, useLocation } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Navbar, Nav } from 'react-bootstrap';
 import QuickPickForm from './components/QuickPickForm';
-import AllRecipes from './components/AllRecipes';
+import AllSavedRecipes from './components/AllSavedRecipes';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import userService from './requests/user';
+import userService from './services/user';
 import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const App = () => {
@@ -59,7 +59,7 @@ const App = () => {
         <Route path="/recipes">
           <div className="wrapper flex-grow-1" style={{margin: '1rem'}}>
             <Row>
-              <AllRecipes />
+              <AllSavedRecipes />
             </Row>
           </div>
         </Route>

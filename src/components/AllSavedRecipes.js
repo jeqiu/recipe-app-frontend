@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import recipeService from '../requests/recipe';
+import recipeService from '../services/recipe';
 import SavedRecipe from './SavedRecipe';
 
-const AllRecipes = () => {
+const AllSavedRecipes = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const AllRecipes = () => {
 
 }
 
-export default AllRecipes
+export default AllSavedRecipes
