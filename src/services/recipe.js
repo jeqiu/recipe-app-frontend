@@ -1,6 +1,22 @@
 import axios from 'axios'
 const baseUrl = '/api/recipes'
 
+const saveRandomRecipe = async (recipeToSave) => {
+  try { 
+    const response = await axios.post(baseUrl, recipeToSave);
+    console.log(response);
+  } catch (error) {
+    if (error.response) { // request made & server responded w/ status code outside of 2xx
+      console.log("error data:", error.response);
+    } else if (error.request) {  // request was made but no response was received
+      console.log(error.request);
+    } else {
+      console.log('error in setting up request: ', error.message);
+    }
+    console.log(error.config);
+  }
+};
+
 const getRandomRecipe = async () => {
   try { 
     const response = await axios.get(baseUrl + '/random_recipe');
@@ -71,5 +87,6 @@ const getAllRecipes = async () => {
 export default { 
   getRandomRecipe, 
   getSearchRecipe,
-  getAllRecipes
+  getAllRecipes,
+  saveRandomRecipe
 }
