@@ -4,41 +4,55 @@ import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
-test('rendering form and no login allowed with blank username and password', async () => {
+describe('<LoginForm />', () => {
 
-  render(<LoginForm />);
+  test('login not allowed without username and password', async () => {
 
-  const usernameInput = screen.getByPlaceholderText('Enter your username');
-  const passwordInput = screen.getByPlaceholderText('Enter your password');
-  expect(usernameInput).toBeDefined();
-  expect(passwordInput).toBeDefined();
+    render(<LoginForm />);
+    const usernameInput = screen.getByPlaceholderText('Enter your username');
+    const passwordInput = screen.getByPlaceholderText('Enter your password');
+    expect(usernameInput).toBeDefined();
+    expect(passwordInput).toBeDefined();
 
-  userEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getByRole('button'));
 
-  await waitFor(() => {
-    const usernameReq = screen.getByText('Username is required');
-    expect(usernameReq).toBeInTheDocument();
+    await waitFor(() => {
+      const usernameReq = screen.getByText('Username is required');
+      expect(usernameReq).toBeInTheDocument();
+    })
+    
+    await waitFor(() => {
+      const passwordReq = screen.getByText('Password is required');
+      expect(passwordReq).toBeInTheDocument();
+      // screen.debug(passwordReq);
+    })
+
   })
-  
-  await waitFor(() => {
-    const passwordReq = screen.getByText('Password is required');
-    expect(passwordReq).toBeInTheDocument();
-    // screen.debug(passwordReq);
+
+  test('basic validation of username and password fields', async () => {
+    render(<LoginForm />);
+    userEvent.type(screen.getByPlaceholderText(/enter your username/i), 'John');
+    userEvent.type(screen.getByPlaceholderText(/enter your password/i), 'supersecret');
+
+    userEvent.click(screen.getByRole('button', {name: /login/i}));
+
+    const usernameWarning = await screen.findByText('Username must be at least 6 characters');
+    expect(usernameWarning).toBeInTheDocument();
+    const passwordWarning = await screen.findByText('Password must contain a number');
+    expect(passwordWarning).toBeInTheDocument();
   })
 
-})
+  test('valid login', async () => {
+    const submitData = jest.fn()
+    render(<LoginForm submitData={submitData} />);
+    userEvent.type(screen.getByPlaceholderText(/enter your username/i), 'John Doe');
+    userEvent.type(screen.getByPlaceholderText(/enter your password/i), 'supersecret42');
 
-test('basic validation of username and password fields', async () => {
-  const handleSubmit = jest.fn();
-  render(<LoginForm onSubmit={handleSubmit} />);
+    userEvent.click(screen.getByRole('button', {name: /login/i}));
 
-  userEvent.type(screen.getByPlaceholderText(/enter your username/i), 'John');
-  userEvent.type(screen.getByPlaceholderText(/enter your password/i), 'supersecret');
+    await waitFor(() => {
+      expect(submitData.mock.calls).toHaveLength(1);
+    })
+  })
 
-  userEvent.click(screen.getByRole('button', {name: /login/i}));
-
-  const usernameWarning = await screen.findByText('Username must be at least 6 characters');
-  expect(usernameWarning).toBeInTheDocument();
-  const passwordWarning = await screen.findByText('Password must contain a number');
-  expect(passwordWarning).toBeInTheDocument();
 })

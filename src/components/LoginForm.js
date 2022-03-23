@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-const LoginForm = () => {
+const LoginForm = ({submitData}) => {
   
   const schema = Yup.object().shape({
     username: Yup.string()
@@ -22,6 +22,7 @@ const LoginForm = () => {
       setTimeout(() => {
         console.log("Form is validated..Logging in");
         console.log(values);
+        // submitData();
         // do stuff with form values
         setSubmitting(false); // ends form submission
       }, 500);
