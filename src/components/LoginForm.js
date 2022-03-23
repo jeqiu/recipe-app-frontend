@@ -20,7 +20,8 @@ const LoginForm = () => {
     initialValues={{ username: "", password: "" }}
     onSubmit={ (values, { setSubmitting }) => {
       setTimeout(() => {
-        console.log("Form is validated..Logging in", values);
+        console.log("Form is validated..Logging in");
+        console.log(values);
         // do stuff with form values
         setSubmitting(false); // ends form submission
       }, 500);
@@ -78,22 +79,13 @@ const LoginForm = () => {
             onBlur={handleBlur}
           />
         </InputGroup>
-        {/* <label htmlFor="password">Password</label>
-        <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Enter your password"
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        /> */}
 
         {errors.password && touched.password && (
           <div className="alert alert-warning">{errors.password}</div>
         )}
 
         <Button 
+          name="login"
           type="submit" 
           disabled={isSubmitting}
         >
