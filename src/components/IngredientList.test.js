@@ -55,10 +55,10 @@ const ingredientsArr = [
         },
     ];
 
-describe('<RandomRecipe />', () => {
+describe('<IngredientList />', () => {
 
   test('render', async () => {
 
-    render(<IngredientList />);
+    render(<IngredientList ingredients={ingredientsArr} />);
   })
 })

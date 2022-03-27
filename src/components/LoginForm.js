@@ -22,7 +22,7 @@ const LoginForm = ({submitData}) => {
       setTimeout(() => {
         console.log("Form is validated..Logging in");
         console.log(values);
-        // submitData();
+        // submitData(); enable test
         // do stuff with form values
         setSubmitting(false); // ends form submission
       }, 500);
