@@ -20,6 +20,7 @@ const AllSavedRecipes = () => {
       {recipes.map(recipe=>
         <SavedRecipe
           key={recipe.recipe_id}
+          recipe_id={recipe.recipe_id}
           title={recipe.title}
           sourceUrl={recipe.url}
           image={recipe.image_url}

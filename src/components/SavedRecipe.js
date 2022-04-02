@@ -1,7 +1,17 @@
 import React from 'react';
-import { Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image, Button } from 'react-bootstrap';
+import recipeService from '../services/recipe';
 
-const SavedRecipe = ({ title, image, sourceUrl }) => {
+const SavedRecipe = ({ recipe_id, title, image, sourceUrl }) => {
+  const handleDelete = async () => {
+    try {
+      const res = await recipeService.deleteRecipe(recipe_id);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Row 
     style={{paddingTop: '1rem'}}
@@ -14,13 +24,25 @@ const SavedRecipe = ({ title, image, sourceUrl }) => {
       </Col>
       <Col sm={{ span: 8 }}>
         <Row>
-          <Col>
+          <Col style={{fontSize: '1.25rem'}}>
             <b>{title}</b>
           </Col>
         </Row>
-        <Row>
-          <Col><a href={sourceUrl} target="_blank" rel="noopener noreferrer">View Full Recipe</a></Col>
+        <Row style={{paddingTop: '0.5rem'}}>
+          <Col><a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+            <Button>View Full Recipe</Button>
+          </a></Col>
         </Row>
+        <Row style={{paddingTop: '0.5rem'}}>
+        <Col>
+          <Button 
+            variant="secondary"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </Col>
+      </Row>
       </Col>
     </Row>
   )

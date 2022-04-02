@@ -5,8 +5,9 @@ import recipeService from '../services/recipe';
 
 const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoading, setImgLoading }) => {
   const [isBtnLoading, setBtnLoading] = useState(false);
+  const [isRecipeSaved, setRecipeSaved] = useState(false);
   
-  const handleClick = () => {
+  const handleClick = async () => {
     setBtnLoading(true);
 
     let ingredientArr = ingredients.map(ingredient => {
@@ -20,11 +21,14 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
       url: sourceUrl,
       imageUrl: image,
     };
-
-    recipeService
-      .saveRandomRecipe(recipeToSave)
-      .then(res=>console.log(res))
-      .then(() => setBtnLoading(false));
+    try {
+      const res = await recipeService.saveRandomRecipe(recipeToSave);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    setBtnLoading(false);
+    setRecipeSaved(true);
   }
 
   if (imgLoading) {
@@ -87,12 +91,22 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
         </Row>
         </Col>
       </Row>
-      
+
+     {
+      (isRecipeSaved && // test without this line first
+      <Alert variant="success" className="text-center mb-4" dismissible>
+        <Alert.Heading>Recipe Saved</Alert.Heading>
+        <p>
+          See list of saved recipes
+        </p>
+      </Alert>
+      )
+      }
       <Row className="text-center" style={{paddingTop: '0.5rem'}}>
         <Col className="text-center">
           <Button 
             variant="primary"
-            disabled={isBtnLoading}
+            disabled={isRecipeSaved || isBtnLoading}
             onClick={handleClick}
           >
             Save This Recipe

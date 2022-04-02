@@ -1,22 +1,6 @@
 import axios from 'axios'
 const baseUrl = '/api/recipes'
 
-const saveRandomRecipe = async (recipeToSave) => {
-  try { 
-    const response = await axios.post(baseUrl, recipeToSave);
-    console.log(response);
-  } catch (error) {
-    if (error.response) { // request made & server responded w/ status code outside of 2xx
-      console.log("error data:", error.response);
-    } else if (error.request) {  // request was made but no response was received
-      console.log(error.request);
-    } else {
-      console.log('error in setting up request: ', error.message);
-    }
-    console.log(error.config);
-  }
-};
-
 const getRandomRecipe = async () => {
   try { 
     const response = await axios.get(baseUrl + '/random_recipe');
@@ -74,10 +58,34 @@ const getAllRecipes = async () => {
   }
 };
 
-// const create = newObject => {
-//   const req = axios.post(baseUrl, newObject);
-//   return req.then(res => res.data);
-// };
+const saveRandomRecipe = async (recipeToSave) => {
+  try { 
+    const response = await axios.post(baseUrl, recipeToSave);
+    console.log(response);
+  } catch (error) {
+    if (error.response) { // request made & server responded w/ status code outside of 2xx
+      console.log("error data:", error.response);
+    } else if (error.request) {  // request was made but no response was received
+      console.log(error.request);
+    } else {
+      console.log('error in setting up request: ', error.message);
+    }
+    console.log(error.config);
+  }
+};
+
+const deleteRecipe = async (recipeId) => {
+  try { 
+    const res = await axios.delete(`${baseUrl}/${recipeId}`);
+    console.log(res);
+    
+  } catch (error) {
+    if (error.response) { // request made & server responded w/ status code outside of 2xx
+      console.log("error data:", error.response);
+    } 
+    console.log(error);
+  }
+};
 
 // const update = (id, newObject) => {
 //   const req = axios.put(`${baseUrl}/${id}`, newObject);
@@ -88,5 +96,6 @@ export default {
   getRandomRecipe, 
   getSearchRecipe,
   getAllRecipes,
-  saveRandomRecipe
+  saveRandomRecipe,
+  deleteRecipe
 }
