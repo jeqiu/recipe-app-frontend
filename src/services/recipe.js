@@ -62,6 +62,8 @@ const saveRandomRecipe = async (recipeToSave) => {
   try { 
     const response = await axios.post(baseUrl, recipeToSave);
     console.log(response);
+    //return {message: 'random recipe saved'};
+    return response.status;
   } catch (error) {
     if (error.response) { // request made & server responded w/ status code outside of 2xx
       console.log("error data:", error.response);
@@ -77,13 +79,14 @@ const saveRandomRecipe = async (recipeToSave) => {
 const deleteRecipe = async (recipeId) => {
   try { 
     const res = await axios.delete(`${baseUrl}/${recipeId}`);
-    console.log(res);
-    
+    console.log('deleteRecipe res: ', res);
+    return res.data.message;
   } catch (error) {
     if (error.response) { // request made & server responded w/ status code outside of 2xx
       console.log("error data:", error.response);
     } 
-    console.log(error);
+    console.log(error.message);
+    console.log(error.config);
   }
 };
 

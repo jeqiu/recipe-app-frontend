@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Col, Button, Image, Alert } from 'react-bootstrap';
 import IngredientList from './IngredientList';
 import recipeService from '../services/recipe';
@@ -22,13 +23,13 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
       imageUrl: image,
     };
     try {
-      const res = await recipeService.saveRandomRecipe(recipeToSave);
-      console.log(res);
+      const status = await recipeService.saveRandomRecipe(recipeToSave);
+      console.log(status);
+      if (status === 201) setRecipeSaved(true);
     } catch (error) {
       console.log(error);
     }
     setBtnLoading(false);
-    setRecipeSaved(true);
   }
 
   if (imgLoading) {
@@ -86,22 +87,30 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
           style={{paddingBottom: '1rem'}}
         >
           <Col>
-          <a href={sourceUrl} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
+          <a href={sourceUrl} style={{textDecoration: 'none'}} target='_blank' rel='noopener noreferrer'>View Full Recipe</a>
           </Col>
         </Row>
         </Col>
       </Row>
 
      {
-      (isRecipeSaved && // test without this line first
-      <Alert variant="success" className="text-center mb-4" dismissible>
-        <Alert.Heading>Recipe Saved</Alert.Heading>
-        <p>
-          See list of saved recipes
-        </p>
-      </Alert>
+      (isRecipeSaved && // test ui without this line first
+      <Row className="justify-content-center">
+        <Col sm={{ span: 7 }}>
+          <Alert variant="success" className="text-center">
+            <Alert.Heading>Recipe Saved</Alert.Heading>
+            <p>
+              <Link to="/recipes" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                See list of saved recipes
+              </Link>
+            </p>
+          </Alert>
+        </Col>
+      </Row>
       )
       }
+      {
+      (!isRecipeSaved &&
       <Row className="text-center" style={{paddingTop: '0.5rem'}}>
         <Col className="text-center">
           <Button 
@@ -113,6 +122,8 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
           </Button>
         </Col>
       </Row>
+      )
+      }
       </Col>
     )
   } else {
