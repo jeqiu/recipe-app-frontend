@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import userEvent from '@testing-library/user-event';
-import { render, screen, waitFor } from '@testing-library/react';
+import { within } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
 import IngredientList from './IngredientList';
 
 const ingredientsArr = [
@@ -11,9 +11,6 @@ const ingredientsArr = [
           "image": "white-powder.jpg",
           "consistency": "solid",
           "name": "baking soda",
-          "nameClean": "baking soda",
-          "original": "1/2 tsp. baking soda",
-          "originalName": "baking soda",
           "amount": 0.5,
           "unit": "tsp",
         },
@@ -23,9 +20,6 @@ const ingredientsArr = [
           "image": "white-powder.jpg",
           "consistency": "solid",
           "name": "baking soda",
-          "nameClean": "baking soda",
-          "original": "1/2 tsp. baking soda",
-          "originalName": "baking soda",
           "amount": 0.5,
           "unit": "tsp",
         },
@@ -35,9 +29,6 @@ const ingredientsArr = [
           "image": "salt.jpg",
           "consistency": "solid",
           "name": "salt",
-          "nameClean": "table salt",
-          "original": "1/4 teaspoon salt",
-          "originalName": "salt",
           "amount": 0.25,
           "unit": "teaspoon",
         },
@@ -47,9 +38,13 @@ const ingredientsArr = [
           "image": "lemon-juice.jpg",
           "consistency": "liquid",
           "name": "lemon juice",
-          "nameClean": "lemon juice",
-          "original": "1 cup fresh lemon juice, about 12 lemons",
-          "originalName": "fresh lemon juice, about 12 lemons",
+          "amount": 1.0,
+          "unit": "cup",
+        },
+        {
+          "id": 9150,
+          "aisle": "Spices and Seasonings",
+          "name": "sugar",
           "amount": 1.0,
           "unit": "cup",
         },
@@ -57,8 +52,27 @@ const ingredientsArr = [
 
 describe('<IngredientList />', () => {
 
-  test('render', async () => {
-
+  test('renders ingredients without duplicates', () => {
     render(<IngredientList ingredients={ingredientsArr} />);
+    const list = screen.getByTestId('ingredientList');
+    const listItems = within(list).getAllByRole('listitem');
+
+    expect(listItems.length).toEqual(4);
   })
+
+  test('ingredient names are correctly displayed', () => {
+    render(<IngredientList ingredients={ingredientsArr} />);
+    const bakingSoda = screen.getByText('Baking soda');
+    expect(bakingSoda).toBeInTheDocument();
+
+    const lemonJuice = screen.getByText('Lemon juice');
+    expect(lemonJuice).toBeInTheDocument();
+
+    const salt = screen.getByText('Salt');
+    expect(salt).toBeInTheDocument();
+
+    const sugar = screen.getByText('Sugar');
+    expect(sugar).toBeInTheDocument();
+  })
+
 })

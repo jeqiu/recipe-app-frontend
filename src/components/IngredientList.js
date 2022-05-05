@@ -18,7 +18,7 @@ const IngredientList = ({ ingredients }) => {
     const ingredientsSecond = filteredIngredients.slice(arrayBreakpoint);
 
     return (
-      <Row className="align-items-center justify-content-center">
+      <Row data-testid="ingredientList" className="align-items-center justify-content-center">
         <Col
           as='ul'
           style={{marginLeft: '3rem'}}
@@ -45,7 +45,7 @@ const IngredientList = ({ ingredients }) => {
     )
   } else {
     return (
-      <Row className="align-items-center">
+      <Row data-testid="ingredientList" className="align-items-center">
       <Col
         as='ul'
         sm={{ span: 5}}
