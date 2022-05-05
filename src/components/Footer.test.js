@@ -8,8 +8,8 @@ describe('<Footer />', () => {
 
     render(<Footer />);
     
-    const footer = screen.getByText(/Recipes from Spoonacular API/);
-    expect(footer).toHaveTextContent(/Quick-Pick Recipes App, 2022./);
+    const footer = screen.getByTestId('footer');
+    expect(footer).toHaveTextContent(/Recipes from Spoonacular API. Quick-Pick Recipes App, 2022./);
 
   })
 })

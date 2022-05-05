@@ -6,11 +6,11 @@ import LoginForm from './LoginForm';
 
 describe('<LoginForm />', () => {
 
-  test('login not allowed without username and password', async () => {
+  test('login requires username and password', async () => {
 
     render(<LoginForm />);
-    const usernameInput = screen.getByPlaceholderText('Enter your username');
-    const passwordInput = screen.getByPlaceholderText('Enter your password');
+    const usernameInput = screen.getByPlaceholderText(/enter your username/i);
+    const passwordInput = screen.getByPlaceholderText(/enter your username/i);
     expect(usernameInput).toBeDefined();
     expect(passwordInput).toBeDefined();
 
