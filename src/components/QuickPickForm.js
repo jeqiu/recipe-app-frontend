@@ -54,12 +54,14 @@ const QuickPickForm = () => {
           pattern='^$|(([a-z]|[A-Z])*,?\s?)*'
           value={searchInput}
           onChange={handleSearchInputChange}
+          data-testid='excludeInput'
         />
         <Button 
           // className="w-50"
           variant='primary' 
           type='submit'
           disabled={isLoading}
+          data-testid='getNewRecipeButton'
         >
           {isLoading ? 'Get A New Recipe' : 'Get A New Recipe'}
         </Button>
