@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import userEvent from '@testing-library/user-event';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import RandomRecipe from './RandomRecipe';
 
 const recipesObj = {
@@ -46,7 +45,22 @@ const recipesObj = {
 
 describe('<RandomRecipe />', () => {
 
-  test('render', async () => {
+  test('render with falsy title', async () => {
+    render(
+      <RandomRecipe
+          recipeId={recipesObj.id}
+          title={null}
+          image={recipesObj.image} 
+          sourceUrl={recipesObj.sourceUrl}
+          ingredients={recipesObj.extendedIngredients}
+          imgLoading={true}
+          setImgLoading={null}  
+      />
+    );
+    expect( screen.getByText(/This app suggests a random recipe using the Spoonacular API/i, { exact: false }) ).toBeInTheDocument();
+  })
+
+  test('render recipe', async () => {
     const setImgLoading = jest.fn();
     render(
       <RandomRecipe
@@ -58,6 +72,13 @@ describe('<RandomRecipe />', () => {
           imgLoading={true}
           setImgLoading={setImgLoading}  
       />
-      );
+    );
+    expect(screen.getByTestId('heading')).toHaveTextContent('Lemon Quick Bread');
+
+    const image = screen.getByAltText('Lemon Quick Bread');
+    expect(image).toHaveAttribute('src', 'https://spoonacular.com/recipeImages/649755-556x370.jpg');
+
+    const link = screen.getByText('View Full Recipe');
+    expect(link).toHaveAttribute('href', 'http://www.foodista.com/recipe/3G7KLCH7/lemon-quick-bread');
   })
 })

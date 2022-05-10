@@ -62,6 +62,7 @@ const RandomRecipe = ({ recipeId, title, image, sourceUrl, ingredients, imgLoadi
             sm={{ span: 6 }}
             md={{ span: 7 }} 
             as="h3"
+            data-testid="heading"
           >
             {title}
           </Col>
